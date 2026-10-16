@@ -1,36 +1,90 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gửi cậu 💗</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10091d">
+<title>Gửi vợ 💗</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;overflow:hidden;color:#fff;font-family:Georgia,serif;background:radial-gradient(ellipse at bottom,#302044,transparent 55%),linear-gradient(#080713,#17102b)}
-#stars{position:fixed;inset:0;pointer-events:none}.star{position:absolute;width:3px;height:3px;background:white;border-radius:50%;box-shadow:0 0 8px white;animation:twinkle 2s infinite alternate}@keyframes twinkle{from{opacity:.2}to{opacity:1}}
-main{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center}.tag{font:12px Arial;letter-spacing:5px;color:#a8fff9}
-#flower{font-size:76px;margin:20px 0 5px;filter:drop-shadow(0 0 14px #ff78d2);animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:translateY(-10px)}}
-h1{color:#ffd5f0;font-size:clamp(28px,7vw,44px);font-weight:normal;text-shadow:0 0 16px #ff61c8}#message{max-width:550px;min-height:100px;font-size:clamp(19px,5vw,26px);line-height:1.7;white-space:pre-line;color:#fff0fa}
-.buttons{display:flex;gap:24px;margin:15px 0}.neon{width:76px;height:60px;border:1px solid #8affff;border-radius:16px;color:white;font-size:27px;background:linear-gradient(135deg,#27e8f2,#008ebc);box-shadow:0 0 12px #00f5ff,0 0 28px #00cfff;cursor:pointer}
-#musicBtn{padding:12px 20px;border:1px solid #ff9edc;border-radius:24px;background:#24152f;color:#ffd8f1;box-shadow:0 0 14px #df57ba;cursor:pointer}#musicStatus{font:12px Arial;color:#d8c8e7;margin-top:8px}.hint{margin-top:18px;font:12px Arial;color:#c9badb}.decor{position:fixed;bottom:12px;left:0;right:0;text-align:center;font-size:28px;letter-spacing:8px;pointer-events:none}
-@media(max-height:650px){#flower{font-size:48px;margin:5px}h1{margin:8px}#message{min-height:65px}}
-</style></head>
-<body><div id="stars"></div><main>
-<div class="tag">A LITTLE MESSAGE FOR YOU</div><div id="flower">🌸</div><h1 id="heading">Gửi cậu 💗</h1>
-<div id="message">À thế cũng sắp 20/10 rồi...</div>
-<div class="buttons"><button class="neon" id="prev">♡</button><button class="neon" id="next">✦</button></div>
-<button id="musicBtn">♫ Bật nhạc Chờ Chút</button>
-<div id="musicStatus">Cần thêm file nhacnen.mp3 cùng thư mục để phát nhạc.</div><div class="hint">Bấm nút phát sáng để đọc tiếp ✨</div>
-</main><div class="decor">✿　❀　✾　❀　✿</div>
+:root{--pink:#ff75c8;--pink2:#ffb6e5;--cyan:#73fbff;--purple:#bba0ff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;overflow:hidden;color:#fff0fa;font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at 50% 85%,#49204e 0%,transparent 43%),radial-gradient(ellipse at 15% 35%,#211a48 0%,transparent 42%),linear-gradient(160deg,#070612,#140b27 60%,#080713)}
+#stars,.sky-effects,.petals,.fireflies{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;box-shadow:0 0 7px 2px #fff8;animation:twinkle var(--dur,2s) ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.18;transform:scale(.7)}to{opacity:1;transform:scale(1.5)}}
+.shooting{position:absolute;width:90px;height:2px;opacity:0;background:linear-gradient(90deg,#fff0,var(--cyan),#fff);filter:drop-shadow(0 0 5px var(--cyan));transform:rotate(-35deg);animation:shoot 7s linear infinite}
+@keyframes shoot{0%,72%{opacity:0;transform:translate(0,0) rotate(-35deg)}74%{opacity:1}83%{opacity:0;transform:translate(-260px,180px) rotate(-35deg)}100%{opacity:0}}
+main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:78px 22px 120px;text-align:center}
+.tag{font:11px Arial,sans-serif;letter-spacing:4px;color:var(--cyan);text-shadow:0 0 10px #51e9ff;margin-bottom:8px}
+#flower{font-size:clamp(54px,14vw,78px);margin:9px 0 8px;filter:drop-shadow(0 0 12px #ff78d2);animation:flowerFloat 3.2s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes flowerFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+#heading{color:var(--pink2);font-size:clamp(25px,7vw,42px);font-weight:normal;line-height:1.25;margin:8px 0 12px;text-shadow:0 0 7px var(--pink),0 0 22px #ff3db9;max-width:700px}
+#message{max-width:620px;min-height:105px;display:flex;align-items:center;justify-content:center;font-size:clamp(19px,5.2vw,27px);line-height:1.65;white-space:pre-line;color:#ffbce6;text-shadow:0 0 8px #ff5ac4,0 0 20px #b22a91;padding:0 5px}
+/* A whole scene fades out and in, with each line appearing softly. */
+.scene{opacity:1;transform:translateY(0) scale(1);filter:blur(0);transition:opacity .65s ease,transform .65s ease,filter .65s ease}
+.scene.leaving{opacity:0;transform:translateY(12px) scale(.97);filter:blur(5px)}
+#message.reveal{animation:messageReveal 1.15s both}
+@keyframes messageReveal{from{opacity:0;transform:translateY(15px);letter-spacing:2px;filter:blur(5px)}to{opacity:1;transform:translateY(0);letter-spacing:0;filter:blur(0)}}
+.buttons{display:flex;gap:22px;margin:17px 0 8px}
+.neon{width:58px;height:49px;border:1px solid #8affff;border-radius:16px;color:white;font-size:24px;background:linear-gradient(135deg,#27dce8,#6e52cf);box-shadow:0 0 12px #00eaff,0 0 25px #b34fff55;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.neon:active{transform:scale(.9);box-shadow:0 0 24px var(--pink)}
+#musicBtn{position:fixed;z-index:10;top:calc(12px + env(safe-area-inset-top));right:12px;padding:10px 13px;border:1px solid #ff9edc;border-radius:22px;background:#24152fdd;color:#ffd8f1;font:13px Arial,sans-serif;box-shadow:0 0 12px #df57ba, inset 0 0 8px #ff75c822;cursor:pointer;backdrop-filter:blur(8px)}
+#musicStatus{font:11px Arial,sans-serif;color:#d9c3e8;margin-top:6px;max-width:290px;min-height:14px}
+.hint{margin-top:13px;font:11px Arial,sans-serif;letter-spacing:.5px;color:#d7c5e8}
+.decor{position:fixed;z-index:1;bottom:10px;left:0;right:0;display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,3vw,24px);font-size:clamp(25px,7vw,42px);pointer-events:none;filter:drop-shadow(0 0 10px #ff69c9)}
+.decor span{display:inline-block;transform-origin:50% 100%;animation:sway 3.5s ease-in-out infinite}.decor span:nth-child(even){animation-delay:-1.4s;animation-duration:4.2s}.decor span:nth-child(3){font-size:1.2em;animation-delay:-.6s}
+@keyframes sway{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(7deg) translateY(-8px)}}
+.petal{position:absolute;top:-30px;font-size:15px;color:#ff9cde;text-shadow:0 0 9px #ff5ac4;animation:fall var(--fall,9s) linear forwards}
+@keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}10%{opacity:.95}90%{opacity:.75}100%{transform:translate3d(var(--drift,70px),110vh,0) rotate(620deg);opacity:0}}
+.firefly{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffe8fa;box-shadow:0 0 8px 3px #ff80d9;animation:fireflyMove var(--dur,8s) ease-in-out infinite alternate}
+@keyframes fireflyMove{0%{transform:translate(0,0);opacity:.15}50%{opacity:1}100%{transform:translate(var(--dx,25px),var(--dy,-55px));opacity:.35}}
+.butterfly{position:absolute;bottom:95px;font-size:22px;filter:drop-shadow(0 0 7px #ff80dc);animation:butterflyFly var(--dur,12s) ease-in-out infinite alternate}
+@keyframes butterflyFly{0%{transform:translate(0,0) rotate(-10deg)}50%{transform:translate(28px,-55px) rotate(12deg)}100%{transform:translate(-12px,-18px) rotate(-8deg)}}
+@media(max-height:650px){main{padding-top:65px;padding-bottom:95px}#flower{font-size:46px;margin:3px}#heading{margin:5px 0 8px}#message{min-height:70px;font-size:clamp(17px,4.5vw,23px)}.buttons{margin:8px 0 4px}.decor{bottom:3px}.hint{margin-top:7px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important}}
+</style>
+</head>
+<body>
+<div id="stars" aria-hidden="true"></div><div class="sky-effects" id="skyEffects" aria-hidden="true"></div><div class="petals" id="petals" aria-hidden="true"></div><div class="fireflies" id="fireflies" aria-hidden="true"></div>
+<button id="musicBtn" aria-label="Bật nhạc" aria-pressed="false">♫ Bật nhạc</button>
+<main>
+  <div class="tag">A LITTLE MESSAGE FOR YOU</div>
+  <section class="scene" id="scene" aria-live="polite">
+    <div id="flower">🌸</div>
+    <h1 id="heading">Gửi vợ💗</h1>
+    <div id="message">Anh có một lời chúc nhỏ gửi đến vợ, chúc em luôn xinh đẹp, dui dẻ và hạnh phúc!</div>
+  </section>
+  <div class="buttons"><button class="neon" id="prev" aria-label="Lời chúc trước">♡</button><button class="neon" id="next" aria-label="Lời chúc tiếp theo">✦</button></div>
+  <div id="musicStatus">Thêm file nhacnen.mp3 vào cùng thư mục để nghe nhạc.</div>
+  <div class="hint">Lời chúc tự chuyển sau vài giây ✨</div>
+</main>
+<div class="decor" aria-hidden="true"><span>✿</span><span>❀</span><span>🌷</span><span>❀</span><span>✿</span></div>
 <audio id="music" src="nhacnen.mp3" preload="none" loop></audio>
 <script>
 const pages=[
-{heading:"Gửi cậu 💗",text:"À thế cũng sắp 20/10 rồi...",flower:"🌸"},
-{heading:"Một lời chúc nhỏ 💗",text:"Chúc cậu luôn xinh đẹp,\nvui vẻ và hạnh phúc nhé!",flower:"🌷"},
-{heading:"Mong cậu luôn vui ✨",text:"Mong mọi điều tốt đẹp\nsẽ đến với cậu.",flower:"💐"},
-{heading:"Dành tặng cậu 💌",text:"Chúc cậu có một ngày 20/10\nthật vui vẻ và đáng nhớ!",flower:"🌹"}];
-let index=0;function showPage(i){index=(i+pages.length)%pages.length;let p=pages[index];document.getElementById("heading").textContent=p.heading;document.getElementById("message").textContent=p.text.replace(/\\n/g,"\n");document.getElementById("flower").textContent=p.flower}
-document.getElementById("next").onclick=()=>showPage(index+1);document.getElementById("prev").onclick=()=>showPage(index-1);
-const music=document.getElementById("music"),btn=document.getElementById("musicBtn"),status=document.getElementById("musicStatus");
-btn.onclick=()=>{if(music.paused){music.play().then(()=>{btn.textContent="♫ Tạm dừng nhạc";status.textContent="Đang phát nhạc nền."}).catch(()=>{status.textContent="Chưa có nhacnen.mp3. Tải file MP3 lên cùng thư mục với index.html."})}else{music.pause();btn.textContent="♫ Bật nhạc Chờ Chút";status.textContent="Nhạc đang tạm dừng."}};
-music.onerror=()=>status.textContent="Chưa có file nhacnen.mp3. Thêm file nhạc bạn có quyền sử dụng vào cùng thư mục.";
-for(let i=0;i<75;i++){let s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*3+"s";document.getElementById("stars").appendChild(s)}
-</script></body></html>
+ {heading:"Gửi vợ💗",text:"Anh có một lời chúc nhỏ gửi đến vợ, chúc em luôn xinh đẹp, dui dẻ và hạnh phúc!",flower:"🌸"},
+ {heading:"Anh có một lời chúc nhỏ gửi đến vợ",text:"Chúc em luôn xinh đẹp, dui dẻ và hạnh phúc!",flower:"🌷"},
+ {heading:"Chúc em sẽ có một ngày 20/10 thật dui dẻ và đáng nhớ",text:"Mong em luôn vui vẻ, bình an và nhận được thật nhiều yêu thương 💗",flower:"💐"}
+];
+const scene=document.getElementById('scene'),heading=document.getElementById('heading'),message=document.getElementById('message'),flower=document.getElementById('flower');
+let index=0,autoTimer=null,transitioning=false;
+function renderPage(i){if(transitioning)return;transitioning=true;index=(i+pages.length)%pages.length;scene.classList.add('leaving');setTimeout(()=>{const p=pages[index];heading.textContent=p.heading;message.textContent=p.text;flower.textContent=p.flower;scene.classList.remove('leaving');message.classList.remove('reveal');void message.offsetWidth;message.classList.add('reveal');transitioning=false;resetAuto();},650)}
+function resetAuto(){clearInterval(autoTimer);autoTimer=setInterval(()=>renderPage(index+1),6500)}
+document.getElementById('next').addEventListener('click',()=>renderPage(index+1));document.getElementById('prev').addEventListener('click',()=>renderPage(index-1));
+// Music playback requires a user tap in most mobile browsers. Provide a real mute/play toggle.
+const music=document.getElementById('music'),musicBtn=document.getElementById('musicBtn'),musicStatus=document.getElementById('musicStatus');
+musicBtn.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicBtn.textContent='🔇 Tắt nhạc';musicBtn.setAttribute('aria-label','Tắt nhạc');musicBtn.setAttribute('aria-pressed','true');musicStatus.textContent='Đang phát nhạc nền 🎵'}catch(e){musicStatus.textContent='Chưa có nhacnen.mp3. Thêm file MP3 vào cùng thư mục với index.html.'}}else{music.pause();musicBtn.textContent='♫ Bật nhạc';musicBtn.setAttribute('aria-label','Bật nhạc');musicBtn.setAttribute('aria-pressed','false');musicStatus.textContent='Nhạc đã tắt.'}});
+music.addEventListener('error',()=>{musicStatus.textContent='Chưa có nhacnen.mp3. Thêm file nhạc bạn có quyền sử dụng vào cùng thư mục.'});
+// Twinkling stars
+const stars=document.getElementById('stars');for(let i=0;i<95;i++){const s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.setProperty('--dur',(1.2+Math.random()*3)+'s');s.style.animationDelay=(-Math.random()*4)+'s';if(Math.random()>.8){s.style.width='3px';s.style.height='3px'}stars.appendChild(s)}
+// Occasional shooting stars
+const sky=document.getElementById('skyEffects');for(let i=0;i<3;i++){const s=document.createElement('i');s.className='shooting';s.style.left=(55+Math.random()*45)+'%';s.style.top=(Math.random()*45)+'%';s.style.animationDelay=(-Math.random()*7)+'s';sky.appendChild(s)}
+// Soft petals drifting down
+const petals=document.getElementById('petals');function makePetal(){const p=document.createElement('span');p.className='petal';p.textContent=Math.random()>.5?'✿':'❀';p.style.left=Math.random()*100+'%';p.style.setProperty('--fall',(8+Math.random()*7)+'s');p.style.setProperty('--drift',(-90+Math.random()*180)+'px');p.style.fontSize=(11+Math.random()*13)+'px';petals.appendChild(p);setTimeout(()=>p.remove(),16000)}for(let i=0;i<10;i++)setTimeout(makePetal,i*700);setInterval(makePetal,1100);
+// Tiny glowing fireflies and a couple of floating butterflies
+const fireflies=document.getElementById('fireflies');for(let i=0;i<16;i++){const f=document.createElement('i');f.className='firefly';f.style.left=Math.random()*100+'%';f.style.top=(20+Math.random()*70)+'%';f.style.setProperty('--dur',(5+Math.random()*8)+'s');f.style.setProperty('--dx',(-40+Math.random()*80)+'px');f.style.setProperty('--dy',(-50+Math.random()*100)+'px');f.style.animationDelay=(-Math.random()*8)+'s';fireflies.appendChild(f)}
+for(let i=0;i<2;i++){const b=document.createElement('span');b.className='butterfly';b.textContent='🦋';b.style.left=(10+i*70)+'%';b.style.setProperty('--dur',(10+i*3)+'s');b.style.animationDelay=(-i*5)+'s';document.body.appendChild(b)}
+resetAuto();
+</script>
+</body>
+</html>
