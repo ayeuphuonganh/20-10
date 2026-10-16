@@ -40,11 +40,39 @@ main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:c
 @keyframes fireflyMove{0%{transform:translate(0,0);opacity:.15}50%{opacity:1}100%{transform:translate(var(--dx,25px),var(--dy,-55px));opacity:.35}}
 .butterfly{position:absolute;bottom:95px;font-size:22px;filter:drop-shadow(0 0 7px #ff80dc);animation:butterflyFly var(--dur,12s) ease-in-out infinite alternate}
 @keyframes butterflyFly{0%{transform:translate(0,0) rotate(-10deg)}50%{transform:translate(28px,-55px) rotate(12deg)}100%{transform:translate(-12px,-18px) rotate(-8deg)}}
+
+/* Password gate */
+#lockScreen{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:22px;background:radial-gradient(ellipse at center,#38143eec,#080612f5);backdrop-filter:blur(10px);transition:opacity .7s ease,visibility .7s ease}
+#lockScreen.unlocked{opacity:0;visibility:hidden;pointer-events:none}
+.lock-card{width:min(100%,390px);padding:30px 22px;border:1px solid #ff8bd9;border-radius:25px;background:linear-gradient(145deg,#30112feF,#170e2af5);box-shadow:0 0 20px #ff52c466,0 0 55px #a83cff33;text-align:center}
+.lock-card h2{color:#ff9cde;font-size:25px;font-weight:normal;text-shadow:0 0 12px #ff42bb;margin:10px 0}
+.lock-card p{color:#f6cde9;line-height:1.5}
+#passwordInput{width:100%;padding:14px 16px;border-radius:14px;border:1px solid #ff86d4;background:#120b20;color:#fff;text-align:center;font-size:20px;letter-spacing:7px;outline:none;box-shadow:inset 0 0 12px #ff60c522}
+#passwordInput:focus{box-shadow:0 0 15px #ff68c7}
+#unlockBtn,.secret-btn,.close-secret{border:1px solid #ffb4e5;border-radius:24px;padding:12px 22px;background:linear-gradient(135deg,#ff8bd5,#c56aff);color:#401137;font-weight:bold;box-shadow:0 0 15px #ff62c988;cursor:pointer}
+#passwordError{min-height:20px;color:#ffb4dc;font:13px Arial,sans-serif;margin:10px 0 0}
+.secret-wrap{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:20px;background:#070411b8;backdrop-filter:blur(7px);opacity:0;visibility:hidden;transition:opacity .55s ease,visibility .55s ease}
+.secret-wrap.open{opacity:1;visibility:visible}
+.secret-card{position:relative;width:min(100%,420px);padding:28px 22px 24px;border-radius:25px;border:1px solid #ff9ddd;background:radial-gradient(ellipse at 50% 0%,#68265b,#321333 55%,#1b102b);box-shadow:0 0 18px #ff61c6,0 0 50px #c344ff88,inset 0 0 25px #ff71ce20;text-align:center;opacity:0;transform:translateY(18px) scale(.78);filter:blur(8px);transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .8s ease,filter .8s ease}
+.secret-wrap.open .secret-card{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+.secret-card h2{color:#ffb3e5;font-size:clamp(21px,6vw,28px);font-weight:normal;line-height:1.3;text-shadow:0 0 8px #ff62c6,0 0 22px #ff43bc;margin:0 0 18px}
+.secret-icons{font-size:22px;letter-spacing:4px;margin-bottom:13px;animation:secretGlow 2s ease-in-out infinite alternate}
+@keyframes secretGlow{from{filter:drop-shadow(0 0 2px #ff65c5)}to{filter:drop-shadow(0 0 10px #ff65c5)}}
+#secretMessage{min-height:95px;display:flex;align-items:center;justify-content:center;color:#fff0fa;font-size:clamp(20px,5.5vw,25px);line-height:1.65;text-shadow:0 0 8px #ff72ca;white-space:pre-line}
+#secretMessage.typing{animation:messageReveal .7s both}
+.secret-footer{font-size:14px;color:#ffb6e5;margin:14px 0 20px}
+.secret-btn{display:none;margin:16px auto 0;font-size:15px;animation:secretBtnIn .8s both}
+.secret-btn.visible{display:block}
+@keyframes secretBtnIn{from{opacity:0;transform:translateY(12px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+
 @media(max-height:650px){main{padding-top:65px;padding-bottom:95px}#flower{font-size:46px;margin:3px}#heading{margin:5px 0 8px}#message{min-height:70px;font-size:clamp(17px,4.5vw,23px)}.buttons{margin:8px 0 4px}.decor{bottom:3px}.hint{margin-top:7px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important}}
 </style>
 </head>
 <body>
+<div id="lockScreen" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+  <div class="lock-card"><div class="secret-icons">💗 ✨ 🌸 ✨ 💗</div><h2 id="lockTitle">Một chút bí mật nho nhỏ</h2><p>Nhập mật khẩu để mở lời chúc dành riêng cho em 💌</p><form id="passwordForm"><input id="passwordInput" type="password" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="••••••••" aria-label="Mật khẩu" required><button id="unlockBtn" type="submit" style="display:block;margin:17px auto 0">💗 Mở lời chúc 💗</button></form><div id="passwordError" role="status"></div></div>
+</div>
 <div id="stars" aria-hidden="true"></div><div class="sky-effects" id="skyEffects" aria-hidden="true"></div><div class="petals" id="petals" aria-hidden="true"></div><div class="fireflies" id="fireflies" aria-hidden="true"></div>
 <button id="musicBtn" aria-label="Bật nhạc" aria-pressed="false">♫ Bật nhạc</button>
 <main>
@@ -57,9 +85,19 @@ main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:c
   <div class="buttons"><button class="neon" id="prev" aria-label="Lời chúc trước">♡</button><button class="neon" id="next" aria-label="Lời chúc tiếp theo">✦</button></div>
   <div id="musicStatus">Thêm file nhacnen.mp3 vào cùng thư mục để nghe nhạc.</div>
   <div class="hint">Lời chúc tự chuyển sau vài giây ✨</div>
+  <button class="secret-btn" id="secretBtn">💗 Lời nói bí mật 💗</button>
 </main>
 <div class="decor" aria-hidden="true"><span>✿</span><span>❀</span><span>🌷</span><span>❀</span><span>✿</span></div>
 <audio id="music" src="nhacnen.mp3" preload="none" loop></audio>
+<div class="secret-wrap" id="secretWrap" aria-hidden="true">
+  <section class="secret-card" role="dialog" aria-modal="true" aria-labelledby="secretTitle">
+    <div class="secret-icons">💌　🌸　💗　🌸　💌</div>
+    <h2 id="secretTitle">💗 LỜI NÓI BÍ MẬT 💗</h2>
+    <div id="secretMessage"></div>
+    <div class="secret-footer">Một góc nhỏ chỉ dành riêng cho em ♡</div>
+    <button class="close-secret" id="closeSecret">♡ Đóng ♡</button>
+  </section>
+</div>
 <script>
 const pages=[
  {heading:"Gửi vợ💗",text:"Anh có một lời chúc nhỏ gửi đến vợ, chúc em luôn xinh đẹp, dui dẻ và hạnh phúc!",flower:"🌸"},
@@ -67,10 +105,19 @@ const pages=[
  {heading:"Chúc em sẽ có một ngày 20/10 thật dui dẻ và đáng nhớ",text:"Mong em luôn vui vẻ, bình an và nhận được thật nhiều yêu thương 💗",flower:"💐"}
 ];
 const scene=document.getElementById('scene'),heading=document.getElementById('heading'),message=document.getElementById('message'),flower=document.getElementById('flower');
-let index=0,autoTimer=null,transitioning=false;
-function renderPage(i){if(transitioning)return;transitioning=true;index=(i+pages.length)%pages.length;scene.classList.add('leaving');setTimeout(()=>{const p=pages[index];heading.textContent=p.heading;message.textContent=p.text;flower.textContent=p.flower;scene.classList.remove('leaving');message.classList.remove('reveal');void message.offsetWidth;message.classList.add('reveal');transitioning=false;resetAuto();},650)}
-function resetAuto(){clearInterval(autoTimer);autoTimer=setInterval(()=>renderPage(index+1),6500)}
-document.getElementById('next').addEventListener('click',()=>renderPage(index+1));document.getElementById('prev').addEventListener('click',()=>renderPage(index-1));
+let index=0,autoTimer=null,transitioning=false,unlocked=false;
+const secretBtn=document.getElementById('secretBtn');
+function renderPage(i){if(transitioning||!unlocked)return;transitioning=true;clearTimeout(autoTimer);index=(i+pages.length)%pages.length;scene.classList.add('leaving');setTimeout(()=>{const p=pages[index];heading.textContent=p.heading;message.textContent=p.text;flower.textContent=p.flower;scene.classList.remove('leaving');message.classList.remove('reveal');void message.offsetWidth;message.classList.add('reveal');transitioning=false;if(index===pages.length-1){clearTimeout(autoTimer);secretBtn.classList.add('visible')}else{secretBtn.classList.remove('visible');resetAuto()}},650)}
+function resetAuto(){clearTimeout(autoTimer);if(unlocked&&index<pages.length-1)autoTimer=setTimeout(()=>renderPage(index+1),6500)}
+document.getElementById('next').addEventListener('click',()=>{if(index===pages.length-1){secretBtn.classList.add('visible');return}renderPage(index+1)});document.getElementById('prev').addEventListener('click',()=>{secretBtn.classList.remove('visible');renderPage(index-1)});
+// Password screen: casual client-side gate, intended for a personal greeting page.
+const lockScreen=document.getElementById('lockScreen'),passwordForm=document.getElementById('passwordForm'),passwordInput=document.getElementById('passwordInput'),passwordError=document.getElementById('passwordError');
+passwordForm.addEventListener('submit',e=>{e.preventDefault();if(passwordInput.value==='07062012'){unlocked=true;passwordError.textContent='';lockScreen.classList.add('unlocked');setTimeout(()=>{lockScreen.style.display='none';resetAuto()},750)}else{passwordError.textContent='Mật khẩu chưa đúng nè, thử lại nha 💗';passwordInput.value='';passwordInput.focus()}});
+// Secret panel opens only after tapping its button; text appears character by character.
+const secretWrap=document.getElementById('secretWrap'),secretMessage=document.getElementById('secretMessage');let typingTimer=null;
+function openSecret(){secretWrap.classList.add('open');secretWrap.setAttribute('aria-hidden','false');secretMessage.textContent='';secretMessage.classList.remove('typing');clearInterval(typingTimer);const words='Là nếu anh có bắt em ăn nhiều thì em đừng bắt đền anh nhoa :) 💗';let n=0;typingTimer=setInterval(()=>{secretMessage.textContent=words.slice(0,++n);if(n>=words.length){clearInterval(typingTimer);secretMessage.classList.add('typing')}},48)}
+function closeSecret(){secretWrap.classList.remove('open');secretWrap.setAttribute('aria-hidden','true');clearInterval(typingTimer)}
+secretBtn.addEventListener('click',openSecret);document.getElementById('closeSecret').addEventListener('click',closeSecret);secretWrap.addEventListener('click',e=>{if(e.target===secretWrap)closeSecret()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSecret()});
 // Music playback requires a user tap in most mobile browsers. Provide a real mute/play toggle.
 const music=document.getElementById('music'),musicBtn=document.getElementById('musicBtn'),musicStatus=document.getElementById('musicStatus');
 musicBtn.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicBtn.textContent='🔇 Tắt nhạc';musicBtn.setAttribute('aria-label','Tắt nhạc');musicBtn.setAttribute('aria-pressed','true');musicStatus.textContent='Đang phát nhạc nền 🎵'}catch(e){musicStatus.textContent='Chưa có nhacnen.mp3. Thêm file MP3 vào cùng thư mục với index.html.'}}else{music.pause();musicBtn.textContent='♫ Bật nhạc';musicBtn.setAttribute('aria-label','Bật nhạc');musicBtn.setAttribute('aria-pressed','false');musicStatus.textContent='Nhạc đã tắt.'}});
@@ -84,7 +131,7 @@ const petals=document.getElementById('petals');function makePetal(){const p=docu
 // Tiny glowing fireflies and a couple of floating butterflies
 const fireflies=document.getElementById('fireflies');for(let i=0;i<16;i++){const f=document.createElement('i');f.className='firefly';f.style.left=Math.random()*100+'%';f.style.top=(20+Math.random()*70)+'%';f.style.setProperty('--dur',(5+Math.random()*8)+'s');f.style.setProperty('--dx',(-40+Math.random()*80)+'px');f.style.setProperty('--dy',(-50+Math.random()*100)+'px');f.style.animationDelay=(-Math.random()*8)+'s';fireflies.appendChild(f)}
 for(let i=0;i<2;i++){const b=document.createElement('span');b.className='butterfly';b.textContent='🦋';b.style.left=(10+i*70)+'%';b.style.setProperty('--dur',(10+i*3)+'s');b.style.animationDelay=(-i*5)+'s';document.body.appendChild(b)}
-resetAuto();
+// The password gate starts the greeting sequence after a correct entry.
 </script>
 </body>
 </html>
