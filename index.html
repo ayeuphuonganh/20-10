@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gửi cậu 💗</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;overflow:hidden;color:#fff;font-family:Georgia,serif;background:radial-gradient(ellipse at bottom,#302044,transparent 55%),linear-gradient(#080713,#17102b)}
+#stars{position:fixed;inset:0;pointer-events:none}.star{position:absolute;width:3px;height:3px;background:white;border-radius:50%;box-shadow:0 0 8px white;animation:twinkle 2s infinite alternate}@keyframes twinkle{from{opacity:.2}to{opacity:1}}
+main{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center}.tag{font:12px Arial;letter-spacing:5px;color:#a8fff9}
+#flower{font-size:76px;margin:20px 0 5px;filter:drop-shadow(0 0 14px #ff78d2);animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:translateY(-10px)}}
+h1{color:#ffd5f0;font-size:clamp(28px,7vw,44px);font-weight:normal;text-shadow:0 0 16px #ff61c8}#message{max-width:550px;min-height:100px;font-size:clamp(19px,5vw,26px);line-height:1.7;white-space:pre-line;color:#fff0fa}
+.buttons{display:flex;gap:24px;margin:15px 0}.neon{width:76px;height:60px;border:1px solid #8affff;border-radius:16px;color:white;font-size:27px;background:linear-gradient(135deg,#27e8f2,#008ebc);box-shadow:0 0 12px #00f5ff,0 0 28px #00cfff;cursor:pointer}
+#musicBtn{padding:12px 20px;border:1px solid #ff9edc;border-radius:24px;background:#24152f;color:#ffd8f1;box-shadow:0 0 14px #df57ba;cursor:pointer}#musicStatus{font:12px Arial;color:#d8c8e7;margin-top:8px}.hint{margin-top:18px;font:12px Arial;color:#c9badb}.decor{position:fixed;bottom:12px;left:0;right:0;text-align:center;font-size:28px;letter-spacing:8px;pointer-events:none}
+@media(max-height:650px){#flower{font-size:48px;margin:5px}h1{margin:8px}#message{min-height:65px}}
+</style></head>
+<body><div id="stars"></div><main>
+<div class="tag">A LITTLE MESSAGE FOR YOU</div><div id="flower">🌸</div><h1 id="heading">Gửi cậu 💗</h1>
+<div id="message">À thế cũng sắp 20/10 rồi...</div>
+<div class="buttons"><button class="neon" id="prev">♡</button><button class="neon" id="next">✦</button></div>
+<button id="musicBtn">♫ Bật nhạc Chờ Chút</button>
+<div id="musicStatus">Cần thêm file nhacnen.mp3 cùng thư mục để phát nhạc.</div><div class="hint">Bấm nút phát sáng để đọc tiếp ✨</div>
+</main><div class="decor">✿　❀　✾　❀　✿</div>
+<audio id="music" src="nhacnen.mp3" preload="none" loop></audio>
+<script>
+const pages=[
+{heading:"Gửi cậu 💗",text:"À thế cũng sắp 20/10 rồi...",flower:"🌸"},
+{heading:"Một lời chúc nhỏ 💗",text:"Chúc cậu luôn xinh đẹp,\nvui vẻ và hạnh phúc nhé!",flower:"🌷"},
+{heading:"Mong cậu luôn vui ✨",text:"Mong mọi điều tốt đẹp\nsẽ đến với cậu.",flower:"💐"},
+{heading:"Dành tặng cậu 💌",text:"Chúc cậu có một ngày 20/10\nthật vui vẻ và đáng nhớ!",flower:"🌹"}];
+let index=0;function showPage(i){index=(i+pages.length)%pages.length;let p=pages[index];document.getElementById("heading").textContent=p.heading;document.getElementById("message").textContent=p.text.replace(/\\n/g,"\n");document.getElementById("flower").textContent=p.flower}
+document.getElementById("next").onclick=()=>showPage(index+1);document.getElementById("prev").onclick=()=>showPage(index-1);
+const music=document.getElementById("music"),btn=document.getElementById("musicBtn"),status=document.getElementById("musicStatus");
+btn.onclick=()=>{if(music.paused){music.play().then(()=>{btn.textContent="♫ Tạm dừng nhạc";status.textContent="Đang phát nhạc nền."}).catch(()=>{status.textContent="Chưa có nhacnen.mp3. Tải file MP3 lên cùng thư mục với index.html."})}else{music.pause();btn.textContent="♫ Bật nhạc Chờ Chút";status.textContent="Nhạc đang tạm dừng."}};
+music.onerror=()=>status.textContent="Chưa có file nhacnen.mp3. Thêm file nhạc bạn có quyền sử dụng vào cùng thư mục.";
+for(let i=0;i<75;i++){let s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*3+"s";document.getElementById("stars").appendChild(s)}
+</script></body></html>
